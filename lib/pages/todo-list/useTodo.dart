@@ -1,28 +1,28 @@
+import 'package:flutter/material.dart';
 import 'package:my_app/models/Todo.dart';
+import 'package:my_app/pages/todo-list/TodoProvider.dart';
+import 'package:provider/provider.dart';
 
 class UseTodo {
-  List<Todo> todos = [
-    Todo(
-      title: 'Buy milk',
-      description: 'There is no milk left in the fridge!',
-      isComplete: false,
-    ),
-    Todo(
-      title: 'Do washer',
-      description: 'There is no milk left in the fridge!',
-      isComplete: true,
-    ),
-  ];
-
-  void addTodo(Todo todo) {
-    print(todo.toString());
-
-    todos.add(todo);
+  void notify(BuildContext context) {
+    Provider.of<TodoProvider>(context, listen: false).notify();
   }
 
-  void delete(int index) {
-    print(index);
-    print(todos.length);
-    todos.removeAt(0);
+  void addTodo(BuildContext context, Todo todo) {
+    Provider.of<TodoProvider>(context, listen: false).todos.add(todo);
+
+    notify(context);
+  }
+
+  void complete(BuildContext context, int index, bool value) {
+    Provider.of<TodoProvider>(context, listen: false).todos[index].isComplete =
+        value;
+
+    notify(context);
+  }
+
+  void delete(BuildContext context, int index) {
+    Provider.of<TodoProvider>(context, listen: false).todos.removeAt(index);
+    notify(context);
   }
 }

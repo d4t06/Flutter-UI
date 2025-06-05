@@ -5,18 +5,23 @@ import 'package:my_app/pages/home.dart';
 
 import 'package:my_app/pages/tabbar/TabBarPage.dart';
 import 'package:my_app/pages/todo-list/Todo.dart';
+import 'package:my_app/pages/todo-list/TodoProvider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    MaterialApp(
-      initialRoute: '/',
-      routes: {
-        '/': (ct) => Home(),
-        '/todo': (ct) => TodoPage(),
-        '/dialog': (ct) => DialogPage(),
-        '/tab-bar': (ct) => TabBarPage(),
-        '/choose-location': (ct) => ChooseLocation(),
-      },
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => TodoProvider())],
+      child: MaterialApp(
+        initialRoute: '/',
+        routes: {
+          '/': (ct) => Home(),
+          '/todo': (ct) => TodoPage(),
+          '/dialog': (ct) => DialogPage(),
+          '/tab-bar': (ct) => TabBarPage(),
+          '/choose-location': (ct) => ChooseLocation(),
+        },
+      ),
     ),
   );
 }

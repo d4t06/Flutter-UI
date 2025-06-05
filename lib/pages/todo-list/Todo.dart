@@ -19,7 +19,7 @@ class _TodoPageState extends State<TodoPage> {
   String todoTitle = '';
   String todoDescription = '';
 
-  void handleAddTodo() {
+  void handleAddTodo(BuildContext ct) {
     if (_formGlobalKey.currentState!.validate()) {
       _formGlobalKey.currentState!.save();
       Todo newTodo = Todo(
@@ -28,17 +28,13 @@ class _TodoPageState extends State<TodoPage> {
         isComplete: false,
       );
 
-      setState(() {
-        useTodo.addTodo(newTodo);
-      });
+      useTodo.addTodo(ct, newTodo);
 
       _formGlobalKey.currentState!.reset();
     }
   }
 
-  void handleDeleteTodo () {
-
-  }
+  void handleDeleteTodo() {}
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +50,7 @@ class _TodoPageState extends State<TodoPage> {
         child: Column(
           spacing: 10,
           children: [
-            Expanded(child: TodoList(todos: useTodo.todos)),
+            Expanded(child: TodoList()),
 
             // form
             Form(
@@ -87,7 +83,7 @@ class _TodoPageState extends State<TodoPage> {
                   ),
                   ElevatedButton(
                     style: ButtonStyle(),
-                    onPressed: handleAddTodo,
+                    onPressed: () => handleAddTodo(context),
                     child: Text("Add"),
                   ),
                 ],
