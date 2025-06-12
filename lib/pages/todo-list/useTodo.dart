@@ -25,4 +25,14 @@ class UseTodo {
     Provider.of<TodoProvider>(context, listen: false).todos.removeAt(index);
     notify(context);
   }
+
+  void edit(BuildContext context, int index, Todo data) {
+    Provider.of<TodoProvider>(context, listen: false).todos[index].title =
+        data.title;
+
+    Provider.of<TodoProvider>(context, listen: false).todos[index].description =
+        data.description;
+
+    notify(context);
+  }
 }
