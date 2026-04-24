@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/Todo.dart';
 import 'package:my_app/pages/dialog/MyDialog.dart';
-import 'package:my_app/pages/todo-list/TodoProvider.dart';
-import 'package:my_app/pages/todo-list/useTodo.dart';
+import 'package:my_app/pages/provider/todo_provider.dart';
 import 'package:provider/provider.dart';
 
-class Test {
-  static Future<bool> show(BuildContext context) async {
-    return false;
-  }
-}
-
 class TodoList extends StatefulWidget {
+  final TodoProvider todoProvider;
+
+  const TodoList({super.key, required this.todoProvider});
+
   @override
   State<TodoList> createState() => _TodoListState();
 }
 
 class _TodoListState extends State<TodoList> {
-  final UseTodo useTodo = UseTodo();
-
   final _formGlobalKey = GlobalKey<FormState>();
 
   String todoTitle = '';
@@ -33,12 +28,12 @@ class _TodoListState extends State<TodoList> {
     );
 
     if (isConfirm) {
-      useTodo.delete(ct, index);
+      widget.todoProvider.delete(ct, index);
     }
   }
 
   void handleCompleteTodo(BuildContext ct, int index, bool isComplete) {
-    useTodo.complete(context, index, isComplete);
+    widget.todoProvider.complete(context, index, isComplete);
   }
 
   void handleEditTodo(BuildContext ct) {
@@ -51,7 +46,7 @@ class _TodoListState extends State<TodoList> {
         isComplete: false,
       );
 
-      useTodo.edit(ct, todoIndex, newTodo);
+      widget.todoProvider.edit(ct, todoIndex, newTodo);
 
       Navigator.of(context).pop();
 
@@ -162,82 +157,79 @@ class _TodoListState extends State<TodoList> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<TodoProvider>(
-      builder: (context, store, child) {
-        if (!store.todos.isNotEmpty) {
-          return Center(child: Text("No todo found"));
-        } else {
-          return ListView.builder(
-            itemCount: store.todos.length,
-            itemBuilder: (_, index) {
-              final Todo item = store.todos[index];
+    final todos = widget.todoProvider.todos;
 
-              return Card(
-                child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Opacity(
-                          opacity: item.isComplete ? .6 : 1,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item.title,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16,
-                                  decoration:
-                                      item.isComplete
-                                          ? TextDecoration.lineThrough
-                                          : null,
-                                ),
-                              ),
-                              Text(item.description),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Row(
-                        spacing: 10,
+    if (todos.isEmpty) {
+      return Center(child: Text("No todo found"));
+    } else {
+      return ListView.builder(
+        itemCount: todos.length,
+        itemBuilder: (_, index) {
+          final Todo item = todos[index];
+
+          return Card(
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Opacity(
+                      opacity: item.isComplete ? .6 : 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ElevatedButton(
-                            onPressed:
-                                () => handleCompleteTodo(
-                                  context,
-                                  index,
-                                  !item.isComplete,
-                                ),
-                            style: buttonStyle,
-                            child:
-                                item.isComplete
-                                    ? Icon(Icons.close)
-                                    : Icon(Icons.check),
+                          Text(
+                            item.title,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                              decoration:
+                                  item.isComplete
+                                      ? TextDecoration.lineThrough
+                                      : null,
+                            ),
                           ),
-
-                          ElevatedButton(
-                            onPressed: () => handleOpenEditModal(index),
-                            style: buttonStyle,
-                            child: Icon(Icons.edit),
-                          ),
-                          ElevatedButton(
-                            onPressed: () => handleDeleteTodo(context, index),
-                            style: buttonStyle,
-                            child: Icon(Icons.delete),
-                          ),
+                          Text(item.description),
                         ],
+                      ),
+                    ),
+                  ),
+                  Row(
+                    spacing: 10,
+                    children: [
+                      ElevatedButton(
+                        onPressed:
+                            () => handleCompleteTodo(
+                              context,
+                              index,
+                              !item.isComplete,
+                            ),
+                        style: buttonStyle,
+                        child:
+                            item.isComplete
+                                ? Icon(Icons.close)
+                                : Icon(Icons.check),
+                      ),
+
+                      ElevatedButton(
+                        onPressed: () => handleOpenEditModal(index),
+                        style: buttonStyle,
+                        child: Icon(Icons.edit),
+                      ),
+                      ElevatedButton(
+                        onPressed: () => handleDeleteTodo(context, index),
+                        style: buttonStyle,
+                        child: Icon(Icons.delete),
                       ),
                     ],
                   ),
-                ),
-              );
-            },
+                ],
+              ),
+            ),
           );
-        }
-      },
-      // },
-    );
+        },
+      );
+    }
   }
 }

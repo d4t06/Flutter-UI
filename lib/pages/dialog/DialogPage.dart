@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/components/Sidebar.dart';
+import 'package:my_app/components/app_sidebar.dart';
 import 'package:my_app/pages/dialog/MyDialog.dart';
 
 class DialogPage extends StatelessWidget {
@@ -8,7 +8,7 @@ class DialogPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Sidebar(),
+      drawer: AppSidebar(),
       appBar: AppBar(backgroundColor: Colors.greenAccent[200]),
       body: Center(
         child: ElevatedButton(

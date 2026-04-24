@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/components/Sidebar.dart';
+import 'package:my_app/components/app_sidebar.dart';
 
 class ChooseLocation extends StatefulWidget {
   @override
@@ -19,7 +19,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
     print("build");
 
     return Scaffold(
-      drawer: Sidebar(),
+      drawer: AppSidebar(),
       appBar: AppBar(),
       body: ElevatedButton(
         onPressed:

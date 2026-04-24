@@ -15,7 +15,25 @@ class TodoProvider extends ChangeNotifier {
     ),
   ];
 
-  void notify() {
+  void addTodo(Todo todo) {
+    todos.add(todo);
+    notifyListeners();
+  }
+
+  void complete(int index, bool value) {
+    todos[index].isComplete = value;
+    notifyListeners();
+  }
+
+  void delete(int index) {
+    todos.removeAt(index);
+    notifyListeners();
+  }
+
+  void edit(int index, Todo data) {
+    todos[index].title = data.title;
+    todos[index].description = data.description;
+
     notifyListeners();
   }
 }

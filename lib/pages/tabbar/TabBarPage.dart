@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/components/Sidebar.dart';
+import 'package:my_app/components/app_sidebar.dart';
 
 class TabBarPage extends StatelessWidget {
   const TabBarPage({super.key});
@@ -9,7 +9,7 @@ class TabBarPage extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        drawer: Sidebar(),
+        drawer: AppSidebar(),
         appBar: AppBar(
           backgroundColor: Colors.greenAccent[200],
           title: Text("Tab Bar"),
