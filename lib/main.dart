@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_app/pages/animations/animation_page.dart';
+import 'package:my_app/pages/custom_scrollview/custom_scrollview_page.dart';
 // import 'package:my_app/pages/choose-location.dart';
 // import 'package:my_app/pages/dialog/DialogPage.dart';
 import 'package:my_app/pages/form/form_page.dart';
 import 'package:my_app/pages/home.dart';
 import 'package:my_app/pages/layout/layout_page.dart';
+import 'package:my_app/pages/onboarding/onboarding_page.dart';
 import 'package:my_app/pages/provider/provider_page.dart';
 import 'package:my_app/pages/riverpod/async_riverpod_page.dart';
 import 'package:my_app/pages/riverpod/riverpod_page.dart';
@@ -34,6 +36,8 @@ List<RouteItem> routes = [
   RouteItem(title: 'Form',path: "/form", builder: (ct) => FormPage()),
   RouteItem(title: 'Sheet',path: "/sheet", builder: (ct) => SheetPage()),
   RouteItem(title: 'Snack bar',path: "/snack-bar", builder: (ct) => SnackBarPage()),
+  RouteItem(title: 'Onboarding',path: "/onboarding", builder: (ct) => OnboardingPage()),
+  RouteItem(title: 'Custom Srollview',path: "/custom-scrollview", builder: (ct) => CustomScrollviewPage()),
 ];
 
 

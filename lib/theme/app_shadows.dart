@@ -1,28 +1,33 @@
 import 'package:flutter/material.dart';
 
 class AppShadows {
-  AppShadows._();
+  const AppShadows();
 
-  static const sm = [
-    BoxShadow(color: Color(0x1A000000), blurRadius: 2, offset: Offset(0, 1)),
+  List<BoxShadow> get sm => [
+    BoxShadow(
+      color: Colors.black.withValues(alpha: 0.05),
+      blurRadius: 4,
+      offset: const Offset(0, 1),
+    ),
   ];
 
-  static const md = [
-    BoxShadow(color: Color(0x26000000), blurRadius: 6, offset: Offset(0, 4)),
+  List<BoxShadow> get md => [
+    BoxShadow(
+      color: Colors.black.withValues(alpha: 0.08),
+      blurRadius: 8,
+      offset: const Offset(0, 4),
+    ),
   ];
 
-  static const lg = [
-    BoxShadow(color: Color(0x33000000), blurRadius: 15, offset: Offset(0, 10)),
-  ];
-
-  static const xl = [
-    BoxShadow(color: Color(0x40000000), blurRadius: 25, offset: Offset(0, 20)),
+  List<BoxShadow> get lg => [
+    BoxShadow(
+      color: Colors.black.withValues(alpha: 0.12),
+      blurRadius: 16,
+      offset: const Offset(0, 8),
+    ),
   ];
 }
 
-extension ThemeContext on BuildContext {
-  List<BoxShadow> get shadowSm => AppShadows.sm;
-  List<BoxShadow> get shadowMd => AppShadows.md;
-  List<BoxShadow> get shadowLg => AppShadows.lg;
-  List<BoxShadow> get shadowXl => AppShadows.xl;
+extension AppShadowsContextExt on BuildContext {
+  AppShadows get shadow => const AppShadows();
 }

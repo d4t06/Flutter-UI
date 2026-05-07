@@ -6,11 +6,13 @@ class AppTheme {
   const AppTheme._();
 
   static ColorScheme _colorScheme(Brightness brightness) {
+    AppColors colors = AppColors();
+
     return ColorScheme(
       brightness: brightness,
-      primary: AppColors.primary,
+      primary: colors.primary,
       onPrimary: AppColors.onPrimary,
-      secondary: AppColors.primary,
+      secondary: colors.primary,
       onSecondary: AppColors.onPrimary,
       error: Colors.red,
       onError: Colors.white,
@@ -51,7 +53,7 @@ class AppTheme {
       useMaterial3: true,
       fontFamily: "ShantellSans",
       scaffoldBackgroundColor: colorSchemes.surface,
-      textTheme: const TextTheme(bodyMedium: AppTextStyles.bodyMedium),
+      textTheme: const TextTheme(bodyMedium: AppTextStyles.textBase),
       colorScheme: colorSchemes,
       appBarTheme: lightElementThemes.appBarTheme,
       dividerColor: lightElementThemes.dividerColor,

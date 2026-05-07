@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_app/components/app_async_value_view.dart';
 import 'package:my_app/components/app_top_bar.dart';
 import 'package:my_app/pages/riverpod/providers/async_product_detail_provider.dart';
+import 'package:my_app/theme/app_colors.dart';
 import 'package:my_app/theme/app_text_styles.dart';
 
 class AsyncRiverpodDetailPage extends ConsumerWidget {
@@ -39,7 +40,10 @@ class AsyncRiverpodDetailPage extends ConsumerWidget {
           AppAsyncValueView(
             value: state,
             data: (product) {
-              return Text(product.title, style: context.textXl.bold);
+              return Text(
+                product.title,
+                style: context.text.textXl.bold.withColor(context.colors.primary),
+              );
             },
           ),
         ],

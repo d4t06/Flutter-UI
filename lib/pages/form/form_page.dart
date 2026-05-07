@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/components/app_sidebar.dart';
 import 'package:my_app/components/app_top_bar.dart';
-import 'package:my_app/theme/app_shadows.dart';
+import 'package:my_app/theme/theme.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({super.key});
@@ -31,7 +31,7 @@ class _FromPageState extends State<FormPage> {
         child: ListView(
           children: [
             Column(
-              spacing: 10,
+              spacing: context.spacing.s3,
               children: [
                 TextField(
                   keyboardType: TextInputType.text,
@@ -59,7 +59,7 @@ class _FromPageState extends State<FormPage> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
-                    boxShadow: context.shadowXl,
+                    boxShadow: context.shadow.lg,
                   ),
 
                   child: Padding(

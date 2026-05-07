@@ -45,7 +45,7 @@ class ProductCardItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(item.title, style: context.textXl.bold),
+                    Text(item.title, style: context.text.textXl.bold),
                     Text(
                       item.description,
                       maxLines: 3,
@@ -53,7 +53,7 @@ class ProductCardItem extends StatelessWidget {
                     ),
                     Text(
                       "${item.price} \$",
-                      style: context.textXl.bold.copyWith(color: Colors.red),
+                      style: context.text.textXl.bold.copyWith(color: Colors.red),
                     ),
                   ],
                 ),
